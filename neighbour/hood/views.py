@@ -6,6 +6,5 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def image_detail(request):
-
+def welcome(request):
     return render(request, 'welcome.html')
