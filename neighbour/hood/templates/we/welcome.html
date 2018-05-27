@@ -1,0 +1,49 @@
+{%extends 'we/base.html'%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home page</title>
+  </head>
+  <body>
+
+{{block.super}}
+{% load  bootstrap4%}
+{% load static %}
+
+{% block styles %}
+  {% bootstrap_css %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% endblock %}
+
+
+<bodyS>
+  {% block content %}
+  {% include "we/navbar.html" %}
+  {% for item in images %}
+  <div class="w3-container">
+
+
+      <div class="w3-card-4" style="width:50%">
+    <div class="w3-container left">
+    <a href="{% url 'detail' image_id=item.id %}"><img src="{{item.image.url}}" class="img-responsive " alt="Image"style="width:100%"></a>
+    <h1>{{item.title}} </h1>
+  </div>
+</div>
+  </div>
+</div>
+  </div>
+    {% empty %}
+    <h2 class="text-center" style="font-size:80px">Looks like today is just fine..  &#x1F605</h2>
+
+    {% endfor %}
+
+  </div>
+  {% endblock %}
+</body>
+&#x1F609
+&#x1F605
+  </body>
+</html>

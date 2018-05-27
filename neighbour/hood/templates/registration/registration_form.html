@@ -1,6 +1,7 @@
 {%extends "registration/base.html"%} {% load bootstrap3 %}
 {% block content %}
 
+
 <style>
   body {
     background-image: url(../../static/images/blurr.png);
@@ -15,10 +16,93 @@
     padding-right: 50px;
     float: left;
   }
+  #pic1 {
+    padding-top: 250px;
+    float: left;
+  }
+  #pic2 {
+    padding-right: 50px;
+    float: left;
+  }
+  #pic3 {
+    padding-top: 250px;
+    float: right;
+  }
+  #pic4 {
+    /* padding-right: 50px; */
+    float: right;
+  }
 </style>
 
 <div class="container">
-  <img src="../../static/images/insta.png" alt="" style="width:40%"id="pic">
+  {# <img src="../../static/images/insta.png" alt="" style="width:40%"id="pic"> #}
+
+
+
+              <style>
+              body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: #efefef;
+              }
+              .eyes {
+                animation: moveEyes 1s forwards infinite;
+              }
+
+              @keyframes moveEyes {
+                0% {
+                  transform: translateX(0%);
+                }
+                20% {
+                  transform: translate(2px, -5px);
+                }
+                40% {
+                  transform: translate(3px, -5px);
+                }
+                60% {
+                  transform: translate(6px, 0px);
+                }
+                80% {
+                  transform: translate(3px, 5px);
+                }
+                100% {
+                  transform: none;
+                }
+              }
+
+              .loader {
+                background-color: ;
+                padding: 10px;
+                border-radius: 50%;
+
+                &__title {
+                  margin-top: 25px;
+                  font-family: Helvetica, Arial;
+                  letter-spacing: 1px;
+                  color: #1D1F20;
+                }
+              }
+              </style>
+              <div id="pic1" class="loader">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path fill="#DDE8E3" d="M2 31.428C2 40.23 5.738 53 17.001 53 28.262 53 32 40.23 32 31.428c0-27.237-30-27.237-30 0zM32 31.428C32 40.23 35.738 53 47.002 53 58.264 53 62 40.23 62 31.428c0-27.237-30-27.237-30 0z"/><path fill="#FFF" d="M2.798 32.088c0 7.561 2.381 19.346 11.968 19.346 9.586 0 11.966-11.785 11.966-19.346.001-26.03-23.934-26.03-23.934 0zM32.799 32.088c0 7.561 2.38 19.346 11.968 19.346 9.586 0 11.967-11.785 11.967-19.346 0-26.03-23.935-26.03-23.935 0z"/><path class="eyes" fill="#493B30" d="M2.798 32.246c0 6.211 4.352 10.965 9.726 10.965 5.372 0 9.724-4.754 9.724-10.965 0-15.276-19.45-15.276-19.45 0zM32.799 32.246c0 6.211 4.353 10.965 9.726 10.965 5.371 0 9.723-4.754 9.723-10.965 0-15.276-19.449-15.276-19.449 0z"/></svg>
+              </div>
+
+              <div id="pic2" class="loader">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path fill="#DDE8E3" d="M2 31.428C2 40.23 5.738 53 17.001 53 28.262 53 32 40.23 32 31.428c0-27.237-30-27.237-30 0zM32 31.428C32 40.23 35.738 53 47.002 53 58.264 53 62 40.23 62 31.428c0-27.237-30-27.237-30 0z"/><path fill="#FFF" d="M2.798 32.088c0 7.561 2.381 19.346 11.968 19.346 9.586 0 11.966-11.785 11.966-19.346.001-26.03-23.934-26.03-23.934 0zM32.799 32.088c0 7.561 2.38 19.346 11.968 19.346 9.586 0 11.967-11.785 11.967-19.346 0-26.03-23.935-26.03-23.935 0z"/><path class="eyes" fill="#493B30" d="M2.798 32.246c0 6.211 4.352 10.965 9.726 10.965 5.372 0 9.724-4.754 9.724-10.965 0-15.276-19.45-15.276-19.45 0zM32.799 32.246c0 6.211 4.353 10.965 9.726 10.965 5.371 0 9.723-4.754 9.723-10.965 0-15.276-19.449-15.276-19.449 0z"/></svg>
+              </div>
+
+              <div id="pic3" class="loader">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path fill="#DDE8E3" d="M2 31.428C2 40.23 5.738 53 17.001 53 28.262 53 32 40.23 32 31.428c0-27.237-30-27.237-30 0zM32 31.428C32 40.23 35.738 53 47.002 53 58.264 53 62 40.23 62 31.428c0-27.237-30-27.237-30 0z"/><path fill="#FFF" d="M2.798 32.088c0 7.561 2.381 19.346 11.968 19.346 9.586 0 11.966-11.785 11.966-19.346.001-26.03-23.934-26.03-23.934 0zM32.799 32.088c0 7.561 2.38 19.346 11.968 19.346 9.586 0 11.967-11.785 11.967-19.346 0-26.03-23.935-26.03-23.935 0z"/><path class="eyes" fill="#493B30" d="M2.798 32.246c0 6.211 4.352 10.965 9.726 10.965 5.372 0 9.724-4.754 9.724-10.965 0-15.276-19.45-15.276-19.45 0zM32.799 32.246c0 6.211 4.353 10.965 9.726 10.965 5.371 0 9.723-4.754 9.723-10.965 0-15.276-19.449-15.276-19.449 0z"/></svg>
+              </div>
+
+              <div id="pic4" class="loader">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path fill="#DDE8E3" d="M2 31.428C2 40.23 5.738 53 17.001 53 28.262 53 32 40.23 32 31.428c0-27.237-30-27.237-30 0zM32 31.428C32 40.23 35.738 53 47.002 53 58.264 53 62 40.23 62 31.428c0-27.237-30-27.237-30 0z"/><path fill="#FFF" d="M2.798 32.088c0 7.561 2.381 19.346 11.968 19.346 9.586 0 11.966-11.785 11.966-19.346.001-26.03-23.934-26.03-23.934 0zM32.799 32.088c0 7.561 2.38 19.346 11.968 19.346 9.586 0 11.967-11.785 11.967-19.346 0-26.03-23.935-26.03-23.935 0z"/><path class="eyes" fill="#493B30" d="M2.798 32.246c0 6.211 4.352 10.965 9.726 10.965 5.372 0 9.724-4.754 9.724-10.965 0-15.276-19.45-15.276-19.45 0zM32.799 32.246c0 6.211 4.353 10.965 9.726 10.965 5.371 0 9.723-4.754 9.723-10.965 0-15.276-19.449-15.276-19.449 0z"/></svg>
+              </div>
+
+
   <div class="row">
     <!-- Empty div -->
     <div class="col-md-4"></div>
@@ -38,7 +122,7 @@
             {% csrf_token %}
             {% bootstrap_form form %}
             <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up" style="width:5px;">
             </div>
 
             <input type="hidden" name="next" value="{{next}}">
@@ -54,5 +138,4 @@
     <div class="col-md-4"></div>
   </div>
 </div>
-
 {% endblock %}
