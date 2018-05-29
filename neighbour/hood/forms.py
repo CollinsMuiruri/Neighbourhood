@@ -1,13 +1,19 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Post
-
+from .models import Post, UserProfileModel
 
 
 class InfoImageForm(forms.ModelForm):
     class Meta:
         model = Post
+        exclude = ['pub_date']
+        widgets = {}
+
+
+class ProfChangeForm(forms.ModelForm):
+    class Meta:
+        model = UserProfileModel
         exclude = ['pub_date']
         widgets = {}
 

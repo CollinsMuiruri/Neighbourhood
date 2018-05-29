@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-family: 'Pangolin', cursive;">
   <div class="container">
     <a class="navbar-brand" href="{% url 'welcome' %}" style="padding-right:80px;padding-left:-10px">              <style>
@@ -55,9 +56,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <p><li class="nav-item"><a href="/admin">Admin</a></li></p>
-              <p><li class="nav-item"><a href="{% url 'liveshowoffs' %}">Latest</a></li></p>
-        <p><li class="nav-item"><a href="{% url 'welcome' %}">All</a></li></p>
+        <li class="nav-item"><a href="/admin">Admin</a></li>
+        <li class="nav-item"><a href="{% url 'liveshowoffs' %}">Latest</a></li>
+        <li class="nav-item"><a href="{% url 'welcome' %}">All</a></li>
       </ul>
 
 
@@ -71,10 +72,10 @@
                   </a>
                   <ul class="dropdown-menu" role="menu">
 
-                      <a href="{%url 'welcome'%}"></a>
-                      <a href="{% url 'new-image' %}">New post</a>
-                      <a href="/accounts/password/change">Change password</a>
-                      <a href="/logout">Logout</a>
+                    <li><a href="{%url 'welcome'%}"></a></li>
+                      <li><a href="{% url 'new-image' %}">New post</a></li>
+                      <li><a href="/accounts/password/change">Change password</a></li>
+                      <li><a href="/logout">Logout</a></li>
                   </ul>
 
               {% else %}
@@ -85,10 +86,14 @@
         </div>
 
 
-
+<style media="screen">
+  #search{
+    font-size: 20px;
+  }
+</style>
       <form class="form-inline my-2 my-lg-0" role="search" action="{%url 'search_results'%}" style="padding-right:30px;">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search categories" name="image" aria-label="Search" style="font-size:25px;padding-left:40px;">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" style="font-size:25px;"><i class="fa fa-search"></i>&#x1F609</button>
+      <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" name="image" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" style="font-size:20px;"><i class="fa fa-search"></i></button>
     </form>
     </div>
   </div>

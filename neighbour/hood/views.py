@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden, HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from .forms import RegisterUserForm, InfoImageForm
-from .models import UserProfileModel, Post
+from .models import UserProfileModel, Post, Business, Profile, Comment
 import datetime as dt
 
 # Create your views here.
@@ -14,7 +14,7 @@ import datetime as dt
 
 @login_required(login_url='/accounts/login')
 def welcome(request):
-    return render(request, 'we/welcome.html')
+    return render(request, 'index.html')
 
 
 class RegisterUserView(CreateView):
@@ -66,14 +66,14 @@ def detail(request, image_id):
 def search_results(request):
     if 'image' in request.GET and request.GET["image"]:
         search_term = request.GET.get("image")
-        searched_images = UserProfileModel.search_by_category(search_term)
+        searched_images = Business.search_by_business_name(search_term)
         message = f"{search_term}"
 
-        return render(request, 'showme/search.html', {"message": message, "images": searched_images})
+        return render(request, 'we/search.html', {"message": message, "images": searched_images})
 
     else:
         message = "because you haven't searched for any term "
-        return render(request, 'showme/search.html', {"message": message})
+        return render(request, 'we/search.html', {"message": message})
 
 
 @login_required(login_url='/accounts/login')
@@ -83,8 +83,18 @@ def new_image(request):
         form = InfoImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.editor = current_user
+            image.user = current_user
             image.save()
     else:
         form = InfoImageForm()
     return render(request, "profiles/new_image.html", {"form": form})
+
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    title = 'Profile Page'
+    current_user = request.user
+    profile = Profile.get_profile()
+    image = Post.get_images()
+    comments = Comment.get_comment()
+    return render(request, 'profiles/profile.html', {"title": title, "comments": comments, "image": image, "user": current_user, "profile": profile})
