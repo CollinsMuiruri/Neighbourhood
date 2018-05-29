@@ -1,0 +1,5 @@
+<form class="" action="{% url "groups:all" %}">
+  {% csrf_token %}
+  <input type="text" name="q" value="{{ request.GET.q}}" placeholder="search hood">
+  <input type="submit" name="" value="search">
+</form>
