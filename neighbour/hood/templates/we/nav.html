@@ -1,0 +1,183 @@
+<style media="screen">
+nav {
+background-color: #333366;
+width: 100%;
+height: 35px;
+padding: 5px 0;
+display: block;
+position: relative;
+z-index: 99;
+}
+
+#hamburger-menu {
+color: #8395AF;
+vertical-align: middle;
+display: inline-block;
+transition: .1s;
+cursor: pointer;
+}
+#hamburger-menu:hover {
+color: white;
+}
+
+.menu, .menu-right {
+background-color: #333366;
+position: relative;
+display: inline-block;
+z-index: 10;
+height: 30px;
+padding: 5px 20px;
+}
+
+.menu-right {
+float: right;
+}
+
+.menu-list {
+list-style: none;
+display: inline-block;
+padding: 0;
+margin: 0 0 0 20px;
+color: #8395AF;
+position: relative;
+}
+.menu-list li {
+display: inline-block;
+margin: 0 12px;
+vertical-align: middle;
+}
+.menu-list li a {
+color: #8395AF;
+text-decoration: none;
+transition: .1s;
+}
+.menu-list li a:hover {
+color: #fff;
+}
+
+.nav-search {
+display: inline-block;
+position: absolute;
+z-index: 1;
+left: 0;
+width: 100%;
+}
+.nav-search i {
+position: absolute;
+color: #a2b0c3;
+left: 655px;
+z-index: 5;
+padding: 8px 15px;
+}
+.nav-search input {
+height: 35px;
+box-shadow: none;
+border: 0;
+border-radius: 3px;
+width: calc(100% - 900px);
+position: absolute;
+background-color: #485D82;
+padding: 10px 10px 10px 40px;
+color: #e0e5eb;
+margin-left: 660px;
+}
+.nav-search input::-webkit-input-placeholder {
+color: #a2b0c3;
+opacity: 1;
+}
+.nav-search input:-ms-input-placeholder {
+color: #a2b0c3;
+opacity: 1;
+}
+.nav-search input::-ms-input-placeholder {
+color: #a2b0c3;
+opacity: 1;
+}
+.nav-search input::placeholder {
+color: #a2b0c3;
+opacity: 1;
+}
+
+.notification-number {
+position: absolute;
+font-size: 12px;
+font-weight: 600;
+color: #e0e5eb;
+top: -2px;
+}
+
+</style>
+<nav>
+  <div class="menu">
+    <ul class="menu-list">
+      <li><a href=""><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Home</a></li>
+      <li><a href=""><i class="fa fa-pie-chart fa-fw" aria-hidden="true"></i>Neighbourhood</a></li>
+      <li><a href=""><i class="fa fa-user fa-fw" aria-hidden="true"></i>{{user.username}}</a></li>
+      <li><a href=""><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>Businesses</a></li>
+      <li><a href=""><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Contacts</a></li>
+    </ul>
+
+  </div>
+  <div class="nav-search">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    <input type="search" placeholder="Search Businesses In Your Neighbourhood" />
+  </div>
+  <div class="menu-right">
+    <ul class="menu-list">
+      <li><a href=""><i class="fa fa-bell" aria-hidden="true"></i><span class="notification-number"></span></a></li>
+      <li><a href=""><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
+      <li><a href=""><i class="fa fa-heart" aria-hidden="true"></i></a></li>
+      <li><a href="/"><i class="fa fa-power-off" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+</nav>
+<style>
+ body {
+   min-height: 1vh;
+   display: ;
+   flex-direction: column;
+   justify-content: left;
+   align-items: ;
+   background-color:;
+ }
+ .eyes {
+   animation: moveEyes 1s forwards infinite;
+ }
+
+ @keyframes moveEyes {
+   0% {
+     transform: translateX(0%);
+   }
+   20% {
+     transform: translate(2px, -5px);
+   }
+   40% {
+     transform: translate(3px, -5px);
+   }
+   60% {
+     transform: translate(6px, 0px);
+   }
+   80% {
+     transform: translate(3px, 5px);
+   }
+   100% {
+     transform: none;
+   }
+ }
+
+ .loader {
+   background-color: ;
+   padding: 10px;
+   border-radius: 50%;
+
+   &__title {
+     margin-top: 25px;
+     font-family: Helvetica, Arial;
+     letter-spacing: 1px;
+     color: #1D1F20;
+   }
+ }
+ </style>
+ <div id="pic1" class="loader">
+   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path fill="#DDE8E3" d="M2 31.428C2 40.23 5.738 53 17.001 53 28.262 53 32 40.23 32 31.428c0-27.237-30-27.237-30 0zM32 31.428C32 40.23 35.738 53 47.002 53 58.264 53 62 40.23 62 31.428c0-27.237-30-27.237-30 0z"/><path fill="#FFF" d="M2.798 32.088c0 7.561 2.381 19.346 11.968 19.346 9.586 0 11.966-11.785 11.966-19.346.001-26.03-23.934-26.03-23.934 0zM32.799 32.088c0 7.561 2.38 19.346 11.968 19.346 9.586 0 11.967-11.785 11.967-19.346 0-26.03-23.935-26.03-23.935 0z"/><path class="eyes" fill="#493B30" d="M2.798 32.246c0 6.211 4.352 10.965 9.726 10.965 5.372 0 9.724-4.754 9.724-10.965 0-15.276-19.45-15.276-19.45 0zM32.799 32.246c0 6.211 4.353 10.965 9.726 10.965 5.371 0 9.723-4.754 9.723-10.965 0-15.276-19.449-15.276-19.449 0z"/></svg>
+ </div></a>

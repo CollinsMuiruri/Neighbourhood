@@ -98,3 +98,8 @@ def profile(request):
     image = Post.get_images()
     comments = Comment.get_comment()
     return render(request, 'profiles/profile.html', {"title": title, "comments": comments, "image": image, "user": current_user, "profile": profile})
+
+
+@login_required(login_url='/accounts/login')
+def error(request):
+    return render(request, 'we/home.html')

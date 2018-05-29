@@ -54,7 +54,7 @@ body {
 </div>
 <style>
 body {
-  background-image: url(../../static/images/doll.png);
+  background-image: url(../../static/images/backgrounds/2.jpg);
   background-size: cover;
 }
 .login {
@@ -87,7 +87,7 @@ body {
               <input type="submit" class="btn btn-primary btn-sm" value="Login">
             </div>
 
-            <input type="hidden" name="next" value="{{next}}">
+            <input type="hidden" name="next" value="{% url 'profile' %}">
 
           </form>
 

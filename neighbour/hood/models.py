@@ -44,7 +44,7 @@ class Profile(models.Model):
 
 class Neighbourhood(models.Model):
     neighbourhood_name = models.CharField(max_length=100)
-    neighbourhood_icon = models.ImageField(upload_to='admin/', null=True, blank=True)
+    # neighbourhood_icon = models.ImageField(upload_to='admin/', null=True, blank=True)
     neighbourhood_location = models.CharField(max_length=50)
     occuupants_count = models.CharField(max_length=500)
     admin = models.ForeignKey(Admin)
