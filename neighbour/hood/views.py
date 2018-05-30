@@ -123,6 +123,9 @@ def edit(request):
 
 @login_required(login_url='/accounts/login/')
 def neighbourhood_details(request):
+    '''
+    social contacts view
+    '''
     current_user = request.user
     if request.method == 'POST':
         form = SocialDetailsForm(request.POST)
