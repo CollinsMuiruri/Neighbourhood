@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^businesses/$', views.businesses, name='businesses'),
     url(r'^new_neighbourhood/$', views.new_neighbourhood, name='new_neighbourhood'),
     url(r'^neighbourhood_details/$', views.neighbourhood_details, name='social'),
+    url(r'^join/(\d+)', views.join, name='joinHood'),
     # url(r'^chatty/$', views.chatty, name='chatty'),
     url(r'^lipapesa/$', views.error, name='home'),
 ]

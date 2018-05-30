@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from .forms import RegisterUserForm, InfoImageForm, EditProfile, SocialDetailsForm, BusinessForm, NewNeighbourhoodForm
-from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails, Neighbourhood
+from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails, Neighbourhood, Join
 import datetime as dt
 
 # Create your views here.
@@ -199,6 +199,17 @@ def error(request):
     '''
     return render(request, 'we/home.html')
 
+
+def join(request, hoodId):
+    '''
+    This view function will enable new users join a given neighbourhood
+    '''
+    neighbourhood = Neighbourhood.objects.get(pk=hoodId)
+    if Join.objects.filter(user_id=request.user).exists():
+        return redirect('displayhood')
+    else:
+        Join(user_id=request.user, hood_id=neighbourhood).save()
+        return redirect('displayhood')
 
 # def chatty(request):
 #     if request.method == 'POST':
