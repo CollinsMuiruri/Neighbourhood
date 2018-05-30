@@ -111,10 +111,10 @@ top: -2px;
 <nav>
   <div class="menu">
     <ul class="menu-list">
-      <li><a href=""><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Home</a></li>
+      <li><a href="{% url 'index' %}"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Home</a></li>
       <li><a href=""><i class="fa fa-users fa-fw" aria-hidden="true"></i>Neighbourhood</a></li>
       <li><a href=""><i class="fa fa-user fa-fw" aria-hidden="true"></i>{{user.username}}</a></li>
-      <li><a href=""><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Businesses</a></li>
+      <li><a href="{% url 'businesses' %}"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Businesses</a></li>
       <li><a href=""><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Contacts</a></li>
     </ul>
 

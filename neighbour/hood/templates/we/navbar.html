@@ -51,39 +51,38 @@
                   <div id="pic1" class="loader">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path fill="#DDE8E3" d="M2 31.428C2 40.23 5.738 53 17.001 53 28.262 53 32 40.23 32 31.428c0-27.237-30-27.237-30 0zM32 31.428C32 40.23 35.738 53 47.002 53 58.264 53 62 40.23 62 31.428c0-27.237-30-27.237-30 0z"/><path fill="#FFF" d="M2.798 32.088c0 7.561 2.381 19.346 11.968 19.346 9.586 0 11.966-11.785 11.966-19.346.001-26.03-23.934-26.03-23.934 0zM32.799 32.088c0 7.561 2.38 19.346 11.968 19.346 9.586 0 11.967-11.785 11.967-19.346 0-26.03-23.935-26.03-23.935 0z"/><path class="eyes" fill="#493B30" d="M2.798 32.246c0 6.211 4.352 10.965 9.726 10.965 5.372 0 9.724-4.754 9.724-10.965 0-15.276-19.45-15.276-19.45 0zM32.799 32.246c0 6.211 4.353 10.965 9.726 10.965 5.371 0 9.723-4.754 9.723-10.965 0-15.276-19.449-15.276-19.449 0z"/></svg>
                   </div></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><a href="/admin">Admin</a></li>
-        <li class="nav-item"><a href="{% url 'liveshowoffs' %}">Latest</a></li>
-        <li class="nav-item"><a href="{% url 'welcome' %}">All</a></li>
-      </ul>
-
-
+        <li><a href="{% url 'index' %}"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Home</a></li>
+        <li><a href=""><i class="fa fa-users fa-fw" aria-hidden="true"></i>Neighbourhood</a></li>
+        <li><a href=""><i class="fa fa-user fa-fw" aria-hidden="true"></i>{{user.username}}</a></li>
+        <li><a href="{% url 'businesses' %}"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Businesses</a></li>
+        <li><a href=""><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Contacts</a></li>
         <div class="col-sm-6 col-md-6 navbar-right">
-              {% if user.is_authenticated %}
-              <ul>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
+          {% if user.is_authenticated %}
+          <ul>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
 
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
 
-                    <li><a href="{%url 'welcome'%}"></a></li>
-                      <li><a href="{% url 'new-image' %}">New post</a></li>
-                      <li><a href="/accounts/password/change">Change password</a></li>
-                      <li><a href="/logout">Logout</a></li>
-                  </ul>
+                <li><a href="{%url 'welcome'%}"></a></li>
+                <li><a href="{% url 'new-image' %}">New post</a></li>
+                <li><a href="/accounts/password/change">Change password</a></li>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
 
               {% else %}
               <li>
                 <a class="btn btn-default" href="/accounts/login">Login</a>
               </li>
-          {% endif %}
-        </div>
+              {% endif %}
+            </div>
+      </ul>
+
 
 
 <style media="screen">

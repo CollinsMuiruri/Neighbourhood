@@ -21,24 +21,13 @@ h5 {
 
 <div class="w3-container">
   <div class="w3-card-4" style="width:50%">
-    <img id="p1" class="w3-card-img-top" src="{{image.image.url}}" class="img-responsive" alt="{{image_item.image_name}}" style="width:100%">
-    <span class="close" id="close-{{image.image.url}}">&times;</span>
+    <p class="w3-card-img-top" class="img-responsive" style="width:100%">
 
   </div>
     <div class="left">
-      <h5>Name: {{image.title}}</h5>
-      <p>Information: {{image.image_description}}</p>
-      <p> Location:<span class="badge badge-info">{{image.location}}</span></p>
-      <button onclick="copyToClipboard('#p1')">Copy Image link</button>
-      <script>
-      function copyToClipboard(p1) {
-var $temp = $("<input>");
-$("body").append($temp);
-$temp.val($(element).text()).select();
-document.execCommand("copy");
-$temp.remove();
-}
-      </script>
+    <a href="{% url 'business_details' image_id=business.id %}"><h5>Name: {{business.business_name}}</h5></a>
+      <p>Information: {{business.description}}</p>
     </div>
   </div>
+  
 {% endblock %}

@@ -14,10 +14,12 @@ urlpatterns = [
     url(r'^new/image/$', views.new_image, name='new-image'),
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^edit/$', views.edit, name='edit'),
-    url(r'^neighbourhood_details/$', views.neighbourhood_details, name='social'),
-    url(r'^business/$', views.business, name='business'),
-    url(r'^new_neighbourhood/$', views.new_neighbourhood, name='new_neighbourhood'),
+    url(r'^new_business/$', views.new_business, name='new_business'),
     url(r'^business/details$', views.business_details, name='business_details'),
+    url(r'^businesses/$', views.businesses, name='businesses'),
+    url(r'^new_neighbourhood/$', views.new_neighbourhood, name='new_neighbourhood'),
+    url(r'^neighbourhood_details/$', views.neighbourhood_details, name='social'),
+    # url(r'^chatty/$', views.chatty, name='chatty'),
     url(r'^lipapesa/$', views.error, name='home'),
 ]
 if settings.DEBUG:

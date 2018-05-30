@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from .forms import RegisterUserForm, InfoImageForm, EditProfile, SocialDetailsForm, BusinessForm, NewNeighbourhoodForm
-from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails
+from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails, Neighbourhood
 import datetime as dt
 
 # Create your views here.
@@ -26,9 +26,10 @@ def chat(request):
     '''
     Where notices, businesses and social contacts are shown
     '''
-    post = Post.objects.all()
+    posts = Post.objects.all()
     public = NeighbourhoodDetails.objects.all()
-    return render(request, 'the_real_home.html', {"post": post, "public": public})
+    print(public)
+    return render(request, 'the_real_home.html', {"posts": posts, "public": public})
 
 
 class RegisterUserView(CreateView):
@@ -47,14 +48,6 @@ class RegisterUserView(CreateView):
         user.save()
         UserProfileModel.objects.create(user=user)
         return HttpResponse('User registered')
-
-
-def detail(request, image_id):
-    '''
-    Where details of a clicked post are seen
-    '''
-    image = Post.objects.get(id=image_id)
-    return render(request, 'we/details.html', {"image": image})
 
 
 def search_results(request):
@@ -85,9 +78,24 @@ def new_image(request):
             image = form.save(commit=False)
             image.user = current_user
             image.save()
+            return redirect('index')
     else:
         form = InfoImageForm()
     return render(request, "profiles/new_image.html", {"form": form})
+
+
+@login_required(login_url='/accounts/login/')
+def detail(request, image_id):
+    '''
+    Where details of a clicked post are seen
+    '''
+    image = Post.objects.get(id=image_id)
+    return render(request, 'we/details.html', {"image": image})
+
+
+def posts(request):
+    posts = Post.objects.all()
+    return render(request, 'we/the_real_home.html', {"posts": posts})
 
 
 @login_required(login_url='/accounts/login/')
@@ -115,7 +123,7 @@ def edit(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return redirect('profile', current_user.id)
+            return redirect('profile')
     else:
         form = EditProfile()
     return render(request, 'profiles/change_profile.html', {"form": form})
@@ -140,7 +148,7 @@ def neighbourhood_details(request):
 
 
 @login_required(login_url='/accounts/login/')
-def business(request):
+def new_business(request):
     current_user = request.user
     if request.method == 'POST':
         form = BusinessForm(request.POST)
@@ -148,16 +156,19 @@ def business(request):
             business = form.save(commit=False)
             business.user = current_user
             business.save()
-            return redirect('index')
+            return redirect('businesses')
     else:
         form = BusinessForm()
-    return render(request, 'we/business.html', {"form": form})
+    return render(request, 'we/new_business.html', {"form": form})
 
 
 @login_required(login_url='/accounts/login/')
-def business_details(request):
-    business = Business.objects.all()
-    return render(request, 'we/business_details.html', {"business": business})
+def business_details(request, image_id):
+    '''
+    Where details of a clicked post are seen
+    '''
+    image = Post.objects.get(id=image_id)
+    return render(request, 'we/business_details.html', {"image": image})
 
 
 @login_required(login_url='/accounts/login/')
@@ -175,9 +186,27 @@ def new_neighbourhood(request):
     return render(request, 'we/new_neighbourhood.html', {"form": form})
 
 
+@login_required(login_url='/accounts/login/')
+def businesses(request):
+    business = Business.objects.all()
+    return render(request, 'we/businesses.html', {"business": business})
+
+
 @login_required(login_url='/accounts/login')
 def error(request):
     '''
     the error page
     '''
     return render(request, 'we/home.html')
+
+
+# def chatty(request):
+#     if request.method == 'POST':
+#         post_form = InfoImageForm(request.POST)
+#         if post_form.is_valid():
+#             post_form.save()
+#
+#     else:
+#         post_form = InfoImageForm()
+#
+#     return render(request, 'profiles/new_image.html', {'post_form': post_form})

@@ -1,4 +1,4 @@
-{% load bootstrap4 %}
+{% load bootstrap4   %}
 {{ block.super}}
 {% load static %}
 <!DOCTYPE html>
@@ -30,11 +30,11 @@ body {
   <body>
 
 
-    <form action="{% url 'welcome' %}" method="post" enctype="multipart/form-data" id="form">
+    <form  method="post" enctype="multipart/form-data" id="form">
       {% csrf_token %}
 
       {% bootstrap_form form %}
-    <a href="{% url 'new-image' %}"><input type="submit" class="btn btn-success btn-lg" value="Post"></a>
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
     </form>
 
     {% block scripts %}

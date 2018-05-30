@@ -11,7 +11,7 @@ import datetime as dt
 
 
 class Admin(models.Model):
-    admin_name = models.CharField(max_length=50)
+    admin_name = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 # class Profile(models.Model):
@@ -48,7 +48,6 @@ class Neighbourhood(models.Model):
     neighbourhood_icon = models.ImageField(upload_to='admin/', null=True, blank=True)
     neighbourhood_location = models.CharField(max_length=50)
     occuupants_count = models.CharField(max_length=500)
-    admin = models.ForeignKey(Admin)
 
     def __str__(self):
         return self.neighbourhood_name
@@ -91,7 +90,6 @@ def save_user_profile(sender, instance, **kwargs):
 class Business(models.Model):
     business_name = models.CharField(max_length=100)
     user = models.ForeignKey(User)
-    neighbourhood = models.ForeignKey(Neighbourhood)
     email = models.EmailField(max_length=80)
     description = models.CharField(max_length=500, null=True)
 
@@ -158,7 +156,7 @@ class Post(models.Model):
         return self.title
 
     @classmethod
-    def latest_showoffs(cls):
+    def latest_posts(cls):
         today = dt.date.today()
         images = cls.objects.filter(pub_date__date=today)
         return images
@@ -187,3 +185,15 @@ class NeighbourhoodDetails(models.Model):
 
     def __str__(self):
         return self.detail
+
+
+class Join(models.Model):
+
+    '''
+    Model that keeps track of users and the neighbourhoods they're in
+    '''
+    user_id = models.ForeignKey(User)
+    hood_id = models.ForeignKey(Neighbourhood)
+
+    def __str__(self):
+        return self.user_id
