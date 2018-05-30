@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden, HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
-from .forms import RegisterUserForm, InfoImageForm, EditProfile, SocialDetailsForm, BusinessForm
+from .forms import RegisterUserForm, InfoImageForm, EditProfile, SocialDetailsForm, BusinessForm, NewNeighbourhoodForm
 from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails
 import datetime as dt
 
@@ -156,8 +156,23 @@ def business(request):
 
 @login_required(login_url='/accounts/login/')
 def business_details(request):
-    biz = Business.objects.all()
-    return render(request, 'we/business_details.html', {"biz": biz})
+    business = Business.objects.all()
+    return render(request, 'we/business_details.html', {"business": business})
+
+
+@login_required(login_url='/accounts/login/')
+def new_neighbourhood(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewNeighbourhoodForm(request.POST)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.user = current_user
+            hood.save()
+            return redirect('index')
+    else:
+        form = NewNeighbourhoodForm()
+    return render(request, 'we/new_neighbourhood.html', {"form": form})
 
 
 @login_required(login_url='/accounts/login')
