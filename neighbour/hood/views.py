@@ -122,7 +122,7 @@ def edit(request):
 
 
 @login_required(login_url='/accounts/login/')
-def social_ammenities(request):
+def neighbourhood_details(request):
     current_user = request.user
     if request.method == 'POST':
         form = SocialDetailsForm(request.POST)
@@ -130,7 +130,7 @@ def social_ammenities(request):
             social = form.save(commit=False)
             social.user = current_user
             social.save()
-            return redirect('homepage')
+            return redirect('index')
     else:
         form = SocialDetailsForm()
     return render(request, 'we/neighbourhood_details.html', {"form": form})
