@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden, HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
-from .forms import RegisterUserForm, InfoImageForm, EditProfile, SocialDetailsForm
+from .forms import RegisterUserForm, InfoImageForm, EditProfile, SocialDetailsForm, BusinessForm
 from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails
 import datetime as dt
 
@@ -134,6 +134,21 @@ def neighbourhood_details(request):
     else:
         form = SocialDetailsForm()
     return render(request, 'we/neighbourhood_details.html', {"form": form})
+
+
+@login_required(login_url='/accounts/login/')
+def business(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.save()
+            return redirect('homepage')
+    else:
+        form = BusinessForm()
+    return render(request, 'we/business.html', {"form": form})
 
 
 @login_required(login_url='/accounts/login')
