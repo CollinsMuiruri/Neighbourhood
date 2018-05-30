@@ -45,7 +45,7 @@ class Admin(models.Model):
 
 class Neighbourhood(models.Model):
     neighbourhood_name = models.CharField(max_length=100)
-    # neighbourhood_icon = models.ImageField(upload_to='admin/', null=True, blank=True)
+    neighbourhood_icon = models.ImageField(upload_to='admin/', null=True, blank=True)
     neighbourhood_location = models.CharField(max_length=50)
     occuupants_count = models.CharField(max_length=500)
     admin = models.ForeignKey(Admin)
@@ -71,13 +71,12 @@ class Profile(models.Model):
     neighbourhood = models.ForeignKey(Neighbourhood, null=True, blank=True)
     bio = models.CharField(max_length=60, blank=True)
 
-
     @classmethod
     def get_profile(cls):
         profile = Profile.objects.all()
         return profile
 
-        
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -143,10 +142,10 @@ class UserProfileModel(models.Model):
         if created:
             Profile.objects.create(user=instance)
 
-
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
@@ -176,3 +175,14 @@ class Post(models.Model):
     def get_images(cls):
         images = Post.objects.all()
         return images
+
+
+class NeighbourhoodDetalis(models.Model):
+    detail = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    neighbourhood = models.ForeignKey(Neighbourhood, null=True)
+
+    def __str__(self):
+        return self.detail

@@ -7,7 +7,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.welcome, name='welcome'),
     url(r'^register$', view=RegisterUserView.as_view(), name='register'),
-    url(r'^$', views.liveshowoffs, name='liveshowoffs'),
+    url(r'^index/$', views.chat, name='index'),
     url(r'^home/$', views.welcome, name='welcome'),
     url(r'^detail/(?P<image_id>\d+)', views.detail, name='detail'),
     url(r'^search', views.search_results, name='search_results'),

@@ -15,7 +15,20 @@ import datetime as dt
 
 @login_required(login_url='/accounts/login')
 def welcome(request):
+    '''
+    the home page
+    '''
     return render(request, 'index.html')
+
+
+@login_required(login_url='/accounts/login/')
+def chat(request):
+    '''
+    Where notices, businesses and social contacts are shown
+    '''
+    post = Post.objects.all()
+    public = Contacts.objects.all()
+    return render(request, 'index.html', {"post": post, "public": public})
 
 
 class RegisterUserView(CreateView):
@@ -36,35 +49,18 @@ class RegisterUserView(CreateView):
         return HttpResponse('User registered')
 
 
-def liveshowoffs(request):
-    date = dt.date.today()
-    images = Post.latest_showoffs()
-    return render(request, 'showme/liveshowoffs.html', {"date": date, "images": images})
-
-
-def savedshowoffs(request, past_date):
-
-    try:
-        # converting data from the string url
-        date = dt.datetime.strptime(past_date, '%Y-%m-%d').date()
-
-    except ValueError:
-        # raising 404 error page
-        raise Http404()
-        assert False
-
-    if date == dt.date.today():
-        return redirect(liveshowoffs)
-
-    return render(request, 'showme/savedshowoffs.html', {"date": date})
-
-
 def detail(request, image_id):
+    '''
+    Where details of a clicked post are seen
+    '''
     image = Post.objects.get(id=image_id)
-    return render(request, 'showme/details.html', {"image": image})
+    return render(request, 'we/details.html', {"image": image})
 
 
 def search_results(request):
+    '''
+    searching for businesses
+    '''
     if 'image' in request.GET and request.GET["image"]:
         search_term = request.GET.get("image")
         searched_images = Business.search_by_business_name(search_term)
@@ -79,6 +75,9 @@ def search_results(request):
 
 @login_required(login_url='/accounts/login')
 def new_image(request):
+    '''
+    posting a new post
+    '''
     current_user = request.user
     if request.method == 'POST':
         form = InfoImageForm(request.POST, request.FILES)
@@ -93,6 +92,9 @@ def new_image(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
+    '''
+    the user profile
+    '''
     title = 'Profile Page'
     current_user = request.user
     profile = Profile.get_profile()
@@ -102,6 +104,9 @@ def profile(request):
 
 @login_required(login_url='/accounts/login/')
 def edit(request):
+    '''
+    the profile editing view
+    '''
     profile = request.user.profile
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES, instance=profile)
@@ -118,4 +123,7 @@ def edit(request):
 
 @login_required(login_url='/accounts/login')
 def error(request):
+    '''
+    the error page
+    '''
     return render(request, 'we/home.html')
