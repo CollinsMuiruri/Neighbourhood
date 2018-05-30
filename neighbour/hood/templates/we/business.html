@@ -1,44 +1,45 @@
-{%extends 'we/base.html'%} {% block content %}
-{% load static %}
 {% load bootstrap4 %}
-{% block styles %}
-  {% bootstrap_css %}
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  {% endblock %}
+{{ block.super}}
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width device-width, initial-scale=1">
 
-<style>
-p {
+    <title>New post</title>
+    {{ form.media }}
+
+  {% block styles %} {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endblock %}
+
+  </head>
+  <style>
+#form {
+  width: 1050px;
+  padding-left: 550px;
+  padding-top: 100px;
+  color: white;
   font-size: 20px;
 }
-h5 {
-  font-size: 20px;
+body {
+  background-image: url(../../static/images/doll.png);
+  background-size: cover;
 }
-.w3-container {
-}
-</style>
-{% include "showme/navbar.html" %}
+  </style>
+  <body>
 
-<div class="w3-container">
-  <div class="w3-card-4" style="width:50%">
-    <img id="p1" class="w3-card-img-top" src="{{image.image.url}}" class="img-responsive" alt="{{image_item.image_name}}" style="width:100%">
-    <span class="close" id="close-{{image.image.url}}">&times;</span>
 
-  </div>
-    <div class="left">
-      <h5>Name: {{image.title}}</h5>
-      <p>Information: {{image.image_description}}</p>
-      <p> Location:<span class="badge badge-info">{{image.location}}</span></p>
-      <button onclick="copyToClipboard('#p1')">Copy Image link</button>
-      <script>
-      function copyToClipboard(p1) {
-var $temp = $("<input>");
-$("body").append($temp);
-$temp.val($(element).text()).select();
-document.execCommand("copy");
-$temp.remove();
-}
-      </script>
-    </div>
-  </div>
-{% endblock %}
+    <form action="{% url 'welcome' %}" method="post" enctype="multipart/form-data" id="form">
+      {% csrf_token %}
+
+      {% bootstrap_form form %}
+    <a href="{% url 'new-image' %}"><input type="submit" class="btn btn-success btn-lg" value="Post"></a>
+    </form>
+
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %} {% endblock %}
+
+  </body>
+</html>

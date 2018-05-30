@@ -14,7 +14,8 @@ urlpatterns = [
     url(r'^new/image/$', views.new_image, name='new-image'),
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^edit/$', views.edit, name='edit'),
-    url(r'^social/$', views.neighbourhood_details, name='social'),
+    url(r'^neighbourhood_details/$', views.neighbourhood_details, name='social'),
+    url(r'^business/$', views.business, name='business'),
     url(r'^lipapesa/$', views.error, name='home'),
 ]
 if settings.DEBUG:

@@ -93,6 +93,7 @@ class Business(models.Model):
     user = models.ForeignKey(User)
     neighbourhood = models.ForeignKey(Neighbourhood)
     email = models.EmailField(max_length=80)
+    description = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.location

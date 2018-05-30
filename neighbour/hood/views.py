@@ -148,7 +148,7 @@ def business(request):
             business = form.save(commit=False)
             business.user = current_user
             business.save()
-            return redirect('homepage')
+            return redirect('index')
     else:
         form = BusinessForm()
     return render(request, 'we/business.html', {"form": form})
