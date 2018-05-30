@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden, HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
-from .forms import RegisterUserForm, InfoImageForm, EditProfile
+from .forms import RegisterUserForm, InfoImageForm, EditProfile, SocialDetailsForm
 from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails
 import datetime as dt
 
@@ -119,6 +119,21 @@ def edit(request):
     else:
         form = EditProfile()
     return render(request, 'profiles/change_profile.html', {"form": form})
+
+
+@login_required(login_url='/accounts/login/')
+def social_ammenities(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = SocialDetailsForm(request.POST)
+        if form.is_valid():
+            social = form.save(commit=False)
+            social.user = current_user
+            social.save()
+            return redirect('homepage')
+    else:
+        form = SocialDetailsForm()
+    return render(request, 'we/neighbourhood_details.html', {"form": form})
 
 
 @login_required(login_url='/accounts/login')
