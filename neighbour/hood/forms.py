@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Post, UserProfileModel, Profile, NeighbourhoodDetails, Business
+from .models import Post, UserProfileModel, Profile, NeighbourhoodDetails, Business, Neighbourhood
 
 
 class InfoImageForm(forms.ModelForm):
@@ -46,7 +46,14 @@ class SocialDetailsForm(forms.ModelForm):
         model = NeighbourhoodDetails
         exclude = ['neighbourhood']
 
+
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         exclude = ['neighbourhood', 'user']
+
+
+class NewNeighbourhoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighbourhood
+        fields = ('neighbourhood_name', 'neighbourhood_location', 'occuupants_count', 'admin', 'neighbourhood_icon')
