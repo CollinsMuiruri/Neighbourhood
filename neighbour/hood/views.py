@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from .forms import RegisterUserForm, InfoImageForm, EditProfile
-from .models import UserProfileModel, Post, Business, Profile
+from .models import UserProfileModel, Post, Business, Profile, NeighbourhoodDetails
 import datetime as dt
 
 # Create your views here.
@@ -27,8 +27,8 @@ def chat(request):
     Where notices, businesses and social contacts are shown
     '''
     post = Post.objects.all()
-    public = Contacts.objects.all()
-    return render(request, 'index.html', {"post": post, "public": public})
+    public = NeighbourhoodDetails.objects.all()
+    return render(request, 'the_real_home.html', {"post": post, "public": public})
 
 
 class RegisterUserView(CreateView):
