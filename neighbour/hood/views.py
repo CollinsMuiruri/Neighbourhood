@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden, HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from .forms import RegisterUserForm, InfoImageForm
-from .models import UserProfileModel, Post, Business, Profile, Comment
+from .models import UserProfileModel, Post, Business, Profile
 import datetime as dt
 
 # Create your views here.
@@ -96,8 +96,7 @@ def profile(request):
     current_user = request.user
     profile = Profile.get_profile()
     image = Post.get_images()
-    comments = Comment.get_comment()
-    return render(request, 'profiles/profile.html', {"title": title, "comments": comments, "image": image, "user": current_user, "profile": profile})
+    return render(request, 'profiles/profile.html', {"title": title, "image": image, "user": current_user, "profile": profile})
 
 
 @login_required(login_url='/accounts/login')

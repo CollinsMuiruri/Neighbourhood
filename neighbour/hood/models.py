@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
 import datetime as dt
 
 # Create your models here.
@@ -61,6 +62,7 @@ class Neighbourhood(models.Model):
     def update_image(self):
         self.update()
 
+
 class Business(models.Model):
     business_name = models.CharField(max_length=100)
     user = models.ForeignKey(User)
@@ -101,10 +103,6 @@ class UserProfileModel(models.Model):
     def update_image(self):
         self.update()
 
-    def get_image_by_id(cls, image_id):
-        images = cls.objects.filter(image__icontains=image_id)
-        return images
-
     @classmethod
     def search_by_category(cls, search_term):
         images = cls.objects.filter(category__name__icontains=search_term)
@@ -139,73 +137,7 @@ class Post(models.Model):
     def update_image(self):
         self.update()
 
-    def get_image_by_id(cls, image_id):
-        images = cls.objects.filter(image__icontains=image_id)
-        return images
-
     @classmethod
     def get_images(cls):
         images = Post.objects.all()
         return images
-
-
-class Comment(models.Model):
-    comments = models.CharField(max_length=60, blank=True, null=True)
-    comment_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User)
-    image = models.ForeignKey(Post, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.comments
-
-    class Meta:
-        ordering = ['-comment_date']
-
-    def save_comment(self):
-        return self.save()
-
-    def delete_comment(self):
-        self.delete()
-
-    @classmethod
-    def get_comment(cls):
-        comment = Comment.objects.all()
-        return comment
-
-
-class Group(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(allow_unicode=True, unique=True)
-    description = models.TextField(default='', blank=True)
-    description_html = models.TextField(editable=False, default='', blank=True)
-    members = models.ManyToManyField(User, through='GroupMember')
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        self.description_html = misaka.html(self.description)
-        super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse('groups:single', kwargs={'slug': self.slug})
-
-    @classmethod
-    def search_by_name(cls, search_term):
-        name = cls.objects.filter(name__icontains=search_term)
-        return name
-
-    class Meta:
-        ordering = ['name']
-
-
-class GroupMember(models.Model):
-    group = models.ForeignKey(Group, related_name='memberships')
-    user = models.ForeignKey(User, related_name='user_groups')
-
-    def __str__(self):
-        return self.user.username
-
-    class Meta:
-        unique_together = ('group', 'user')
