@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^edit/$', views.edit, name='edit'),
     url(r'^neighbourhood_details/$', views.neighbourhood_details, name='social'),
     url(r'^business/$', views.business, name='business'),
+    url(r'^business/details$', views.business_details, name='business_details'),
     url(r'^lipapesa/$', views.error, name='home'),
 ]
 if settings.DEBUG:

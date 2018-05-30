@@ -154,6 +154,12 @@ def business(request):
     return render(request, 'we/business.html', {"form": form})
 
 
+@login_required(login_url='/accounts/login/')
+def business_details(request):
+    biz = Business.objects.all()
+    return render(request, 'we/business_details.html', {"biz": biz})
+
+
 @login_required(login_url='/accounts/login')
 def error(request):
     '''
