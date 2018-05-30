@@ -1,6 +1,7 @@
 {# {% extends 'we/base.html' %} #}
 {% load bootstrap4 %}
 {% block content %}
+{% load static %}
 {% include "we/nav.html" %}
 {# {{block.super}}} #}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,7 +18,7 @@
                 {% if prof.profilePic %}
                     <img src="{{prof.profilePic.url}}" alt="" class="img-fluid" style="border-radius:50%">
                 {% else %}
-                    <img src="{% url static 'images/avatar.png' %}" alt="" class="img-fluid rounded-circle">
+                    <img src="{% static 'images/avatar.png' %}" alt="" class="img-fluid rounded-circle">
                 {% endif %}
             </div>
             <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1"></div>

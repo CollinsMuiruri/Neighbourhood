@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Post, UserProfileModel
+from .models import Post, UserProfileModel, Profile
 
 
 class InfoImageForm(forms.ModelForm):
@@ -33,3 +33,9 @@ class RegisterUserForm(forms.ModelForm):
                 raise ValidationError("Passwords do not match")
 
             return cd['password2']
+
+
+class EditProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user', 'email_confirmed']
