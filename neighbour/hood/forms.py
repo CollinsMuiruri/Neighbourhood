@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Post, UserProfileModel, Profile
+from .models import Post, UserProfileModel, Profile, NeighbourhoodDetails
 
 
 class InfoImageForm(forms.ModelForm):
@@ -29,7 +29,7 @@ class RegisterUserForm(forms.ModelForm):
         # validating the passwords
         def clean_password2(self):
             cd = self.cleaned_data
-            if cd['password2'] !=cd['password']:
+            if cd['password2'] != cd['password']:
                 raise ValidationError("Passwords do not match")
 
             return cd['password2']
@@ -38,4 +38,10 @@ class RegisterUserForm(forms.ModelForm):
 class EditProfile(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user', 'email_confirmed']
+        exclude = ['user']
+
+
+class SocialDetailsForm(forms.ModelForm):
+    class Meta:
+        model = NeighbourhoodDetails
+        exclude = ['hood']
