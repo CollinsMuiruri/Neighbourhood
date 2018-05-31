@@ -5,7 +5,7 @@ from .views import RegisterUserView
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.welcome, name='welcome'),
+    url(r'^$', views.posts, name='welcome'),
     url(r'^register$', view=RegisterUserView.as_view(), name='register'),
     url(r'^index/$', views.chat, name='index'),
     url(r'^home/$', views.welcome, name='welcome'),
@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^social_details/$', views.social_details, name='social'),
     url(r'^join/(\d+)', views.join, name='joinHood'),
     url(r'^exitHood/(\d+)', views.exitHood, name='exitHood'),
+    url(r'^the_real_home/$', views.posts, name='yes'),
     # url(r'^chatty/$', views.chatty, name='chatty'),
     url(r'^lipapesa/$', views.error, name='home'),
 ]

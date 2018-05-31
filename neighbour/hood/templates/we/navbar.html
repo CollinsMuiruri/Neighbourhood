@@ -73,11 +73,11 @@ width: 60%; /* The width is 60%, by default */
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li><a href="{% url 'index' %}"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Home</a></li>
+        <li><a href="{% url 'yes' %}"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Home</a></li>
         <li><a href="{% url 'neighbourhoods' %}"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Neighbourhoods</a></li>
-        <li><a href=""><i class="fa fa-user fa-fw" aria-hidden="true"></i>{{user.username}}</a></li>
+        <li><a href="{% url 'profile' %}"><i class="fa fa-user fa-fw" aria-hidden="true"></i>{{user.username}}</a></li>
         <li><a href="{% url 'businesses' %}"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Businesses</a></li>
-        <li><a href=""><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Contacts</a></li>
+        <li><a href="{% url 'contacts' %}"><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Contacts</a></li>
         <div class="col-sm-6 col-md-6 navbar-right">
           {% if user.is_authenticated %}
           <ul>

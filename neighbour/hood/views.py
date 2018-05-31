@@ -95,7 +95,7 @@ def detail(request, image_id):
 
 def posts(request):
     posts = Post.objects.all()
-    return render(request, 'we/the_real_home.html', {"posts": posts})
+    return render(request, 'the_real_home.html', {"posts": posts})
 
 
 @login_required(login_url='/accounts/login/')
