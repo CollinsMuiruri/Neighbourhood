@@ -1,11 +1,12 @@
 <body id="welcome">
-{# {%extends 'we/base.html'%} #}
+{%extends 'we/base.html'%}
 {% block content %}
 {# {{block.super}} #}
 {% include "we/nav.html" %}
 <div class="container">
 
  <div class="row">
+  <a href="{% url 'new_neighbourhood' %}"><button type="button btn-success" name="button">Create New Neighbourhood</button></a>
    {# displaying index Image #}
 {% for posts in posts %}
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-5">

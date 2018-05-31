@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style media="screen">
 nav {
 background-color: #333366;
@@ -106,13 +106,29 @@ font-weight: 600;
 color: #e0e5eb;
 top: -2px;
 }
+.left, .right {
+  float: left;
+  width: 20%; /* The width is 20%, by default */
+}
+
+.main {
+  float: left;
+  width: 60%; /* The width is 60%, by default */
+}
+
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 800px) {
+  .left, .main, .right {
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+}
 
 </style>
 <nav>
   <div class="menu">
     <ul class="menu-list">
       <li><a href="{% url 'index' %}"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Home</a></li>
-      <li><a href=""><i class="fa fa-users fa-fw" aria-hidden="true"></i>Neighbourhood</a></li>
+      <li><a href="{% url 'neighbourhoods' %}"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Neighbourhoods</a></li>
       <li><a href=""><i class="fa fa-user fa-fw" aria-hidden="true"></i>{{user.username}}</a></li>
       <li><a href="{% url 'businesses' %}"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>Businesses</a></li>
       <li><a href=""><i class="fa fa-phone fa-fw" aria-hidden="true"></i>Contacts</a></li>

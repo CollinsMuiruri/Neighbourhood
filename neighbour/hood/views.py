@@ -27,9 +27,9 @@ def chat(request):
     Where notices, businesses and social contacts are shown
     '''
     posts = Post.objects.all()
-    public = NeighbourhoodDetails.objects.all()
-    print(public)
-    return render(request, 'the_real_home.html', {"posts": posts, "public": public})
+    contacts = NeighbourhoodDetails.objects.all()
+    print(contacts)
+    return render(request, 'we/contacts.html', {"posts": posts, "contacts": contacts})
 
 
 class RegisterUserView(CreateView):
@@ -130,7 +130,7 @@ def edit(request):
 
 
 @login_required(login_url='/accounts/login/')
-def neighbourhood_details(request):
+def social_details(request):
     '''
     social contacts view
     '''
@@ -141,10 +141,10 @@ def neighbourhood_details(request):
             social = form.save(commit=False)
             social.user = current_user
             social.save()
-            return redirect('index')
+            return redirect('social')
     else:
         form = SocialDetailsForm()
-    return render(request, 'we/neighbourhood_details.html', {"form": form})
+    return render(request, 'we/social_details.html', {"form": form})
 
 
 @login_required(login_url='/accounts/login/')
@@ -172,6 +172,15 @@ def business_details(request, image_id):
 
 
 @login_required(login_url='/accounts/login/')
+def social(request, image_id):
+    '''
+    Where social contacts are seen
+    '''
+    image = NeighbourhoodDetails.objects.get(id=image_id)
+    return render(request, 'we/business_details.html', {"image": image})
+
+
+@login_required(login_url='/accounts/login/')
 def new_neighbourhood(request):
     current_user = request.user
     if request.method == 'POST':
@@ -180,7 +189,7 @@ def new_neighbourhood(request):
             hood = form.save(commit=False)
             hood.user = current_user
             hood.save()
-            return redirect('index')
+            return redirect('neighbourhoods')
     else:
         form = NewNeighbourhoodForm()
     return render(request, 'we/new_neighbourhood.html', {"form": form})
@@ -190,6 +199,12 @@ def new_neighbourhood(request):
 def businesses(request):
     business = Business.objects.all()
     return render(request, 'we/businesses.html', {"business": business})
+
+
+@login_required(login_url='/accounts/login/')
+def neighbourhoods(request):
+    neighbourhoods = Neighbourhood.objects.all()
+    return render(request, 'we/neighbourhoods.html', {"neighbourhoods": neighbourhoods})
 
 
 @login_required(login_url='/accounts/login')
@@ -206,10 +221,11 @@ def join(request, hoodId):
     '''
     neighbourhood = Neighbourhood.objects.get(pk=hoodId)
     if Join.objects.filter(user_id=request.user).exists():
-        return redirect('displayhood')
+        Join.objects.filter(user_id = request.user).update(hood_id = neighbourhood)
+        return redirect('neighbourhoods')
     else:
         Join(user_id=request.user, hood_id=neighbourhood).save()
-        return redirect('displayhood')
+        return redirect('neighbourhoods')
 
 
 def exitHood(request, hoodId):
@@ -219,7 +235,7 @@ def exitHood(request, hoodId):
     if Join.objects.filter(user_id=request.user).exists():
         Join.objects.get(user_id=request.user).delete()
 
-        return redirect('homepage')
+        return redirect('index')
 
 # def chatty(request):
 #     if request.method == 'POST':
